@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+    <script src="js/main.js" type="module" defer></script>
+    <title>Photo App</title>
+</head>
+
+<body>
+    <header id="topnav">
+        <h1 class="logo">
+            Photo App
+        </h1>
+        <section class="corner">
+            <h1 class="username">
+                Username
+            </h1>
+            <button id="sign-in">
+                Sign Out
+            </button>
+        </section>
+    </header>
+    <main>
+
+        <aside>
+            <div class="Suggestions">
+                <img class="prof" src="https://picsum.photos/200">
+                <section>Username</section>
+            </div>
+            <section class="sug-panel">
+                <span>Suggestions for you</span>
+                <div id="panel-1">
+                    <img class="prof" src="https://picsum.photos/200">
+                    <section id="user1">username1</section>
+                    <p>Suggested for you</p>
+                    <button class="follow-button">follow</button>
+                </div>
+                <div id="panel-2">
+                    <img class="prof" src="https://picsum.photos/200">
+                    <section id="user2">username2</section>
+                    <p>Suggested for you</p>
+                    <button class="follow-button">follow</button>
+                </div>
+                <div id="panel-3">
+                    <img class="prof" src="https://picsum.photos/200">
+                    <section id="user3">username3</section>
+                    <p>Suggested for you</p>
+                    <button class="follow-button">follow</button>
+                </div>
+                <div id="panel-4">
+                    <img class="prof" src="https://picsum.photos/200">
+                    <section id="user4">username4</section>
+                    <p>Suggested for you</p>
+                    <button class="follow-button">follow</button>
+                </div>
+                <div id="panel-5">
+                    <img class="prof" src="https://picsum.photos/200">
+                    <section id="user5">username5</section>
+                    <p>Suggested for you</p>
+                    <button class="follow-button">follow</button>
+                </div>
+
+            </section>
+        </aside>
+
+        <section class="news-feed">
+            <header id="stories-panel">
+                <section class="card1">
+                    <img class="picture-1" src="https://picsum.photos/200">
+                    <button class="story-user-button">username1</button>
+                </section>
+                <section class="card2">
+                    <img class="picture-2" src="https://picsum.photos/200">
+                    <button class="story-user-button">username2</button>
+                </section>
+                <section class="card3">
+                    <img class="picture-3" src="https://picsum.photos/200">
+                    <button class="story-user-button">username3</button>
+                </section>
+                <section class="card4">
+                    <img class="picture-4" src="https://picsum.photos/200">
+                    <button class="story-user-button">username4</button>
+                </section>
+                <section class="card5">
+                    <img class="picture-5" src="https://picsum.photos/200">
+                    <button class="story-user-button">username5</button>
+                </section>
+            </header>
+            <hr>
+            <header class="photo-feed">
+                <div class="post-bar-top">
+                    <p>Username</p>
+                    <button>
+                        <i id="top" class="fas fa-ellipsis-h"></i>
+                    </button>
+                </div>
+                <img class="post" src="https://cdn.pixabay.com/photo/2020/02/13/06/49/seascape-4844697__480.jpg">
+                <div class="post-bar-bottom">
+                    <section class="bottom-icons">
+                        <button>
+                            <i class="far fa-heart"></i>
+                        </button>
+                        <button>
+                            <i class="far fa-comment"></i>
+                        </button>
+                        <button>
+                            <i class="far fa-paper-plane"></i>
+                        </button>
+                    </section>
+                    <button class="bookmark">
+                        <i class="far fa-bookmark"></i>
+                    </button>
+                </div>
+                <div class="comment-section">
+                    <p class="like-count">30 likes</p>
+                    <p class="comments">
+                        <span class="username-poster">
+                            Username1
+                        </span>
+                        <span class="com">
+                            This is a comment from the original poster that describes the image, but honestly I dont
+                            know
+                            and i need to see how long i can make it so here are some random words. word word word hello
+                            where am i what is this come onnnnn take up more I need more...
+                        </span>
+                        <button class="more">more</button>
+                    </p>
+                    <p class="comments">
+                        <span class="username-poster">
+                            Username2
+                        </span>
+                        <span class="com">
+                            This is a one line comment
+                        </span>
+                    </p>
+                    <p class="comments">
+                        <span class="username-poster">
+                            Username3
+                        </span>
+                        <span class="com">
+                            Wow what an amazing picture this is the greatest picture ever now i
+                            need to add a lot of wrds to see if it auto formats or not becuase that is important.
+                        </span>
+                    </p>
+                </div>
+            </header>
+            <header class="photo-feed">
+                <div class="post-bar-top">
+                    <p>Username</p>
+                    <button>
+                        <i id="top" class="fas fa-ellipsis-h"></i>
+                    </button>
+                </div>
+                <img class="post" src="https://cdn.pixabay.com/photo/2020/02/13/06/49/seascape-4844697__480.jpg">
+                <div class="post-bar-bottom">
+                    <section class="bottom-icons">
+                        <button>
+                            <i class="far fa-heart"></i>
+                        </button>
+                        <button>
+                            <i class="far fa-comment"></i>
+                        </button>
+                        <button>
+                            <i class="far fa-paper-plane"></i>
+                        </button>
+                    </section>
+                    <button class="bookmark">
+                        <i class="far fa-bookmark"></i>
+                    </button>
+                </div>
+                <div class="comment-section">
+                    <p class="like-count">30 likes</p>
+                    <p class="comments">
+                        <span class="username-poster">
+                            Username1
+                        </span>
+                        <span class="com">
+                            This is a comment from the original poster that describes the image, but honestly I dont
+                            know
+                            and i need to see how long i can make it so here are some random words. word word word
+                            hello
+                            where am i what is this come onnnnn take up more I need more...
+                        </span>
+                        <button class="more">more</button>
+                    </p>
+                    <p class="comments">
+                        <span class="username-poster">
+                            Username2
+                        </span>
+                        <span class="com">
+                            This is a one line comment
+                        </span>
+                    </p>
+                    <p class="comments">
+                        <span class="username-poster">
+                            Username3
+                        </span>
+                        <span class="com">
+                            Wow what an amazing picture this is the greatest picture ever now i
+                            need to add a lot of wrds to see if it auto formats or not becuase that is important.
+                        </span>
+                    </p>
+                </div>
+            </header>
+            <header class="photo-feed">
+                <div class="post-bar-top">
+                    <p>Username</p>
+                    <button>
+                        <i id="top" class="fas fa-ellipsis-h"></i>
+                    </button>
+                </div>
+                <img class="post" src="https://cdn.pixabay.com/photo/2020/02/13/06/49/seascape-4844697__480.jpg">
+                <div class="post-bar-bottom">
+                    <section class="bottom-icons">
+                        <button>
+                            <i class="far fa-heart"></i>
+                        </button>
+                        <button>
+                            <i class="far fa-comment"></i>
+                        </button>
+                        <button>
+                            <i class="far fa-paper-plane"></i>
+                        </button>
+                    </section>
+                    <button class="bookmark">
+                        <i class="far fa-bookmark"></i>
+                    </button>
+                </div>
+                <div class="comment-section">
+                    <p class="like-count">30 likes</p>
+                    <p class="comments">
+                        <span class="username-poster">
+                            Username1
+                        </span>
+                        <span class="com">
+                            This is a comment from the original poster that describes the image, but honestly I dont
+                            know
+                            and i need to see how long i can make it so here are some random words. word word word
+                            hello
+                            where am i what is this come onnnnn take up more I need more...
+                        </span>
+                        <button class="more">more</button>
+                    </p>
+                    <p class="comments">
+                        <span class="username-poster">
+                            Username2
+                        </span>
+                        <span class="com">
+                            This is a one line comment
+                        </span>
+                    </p>
+                    <p class="comments">
+                        <span class="username-poster">
+                            Username3
+                        </span>
+                        <span class="com">
+                            Wow what an amazing picture this is the greatest picture ever now i
+                            need to add a lot of wrds to see if it auto formats or not becuase that is important.
+                        </span>
+                    </p>
+                </div>
+            </header>
+            <header class="photo-feed">
+                <div class="post-bar-top">
+                    <p>Username</p>
+                    <button>
+                        <i id="top" class="fas fa-ellipsis-h"></i>
+                    </button>
+                </div>
+                <img class="post" src="https://cdn.pixabay.com/photo/2020/02/13/06/49/seascape-4844697__480.jpg">
+                <div class="post-bar-bottom">
+                    <section class="bottom-icons">
+                        <button>
+                            <i class="far fa-heart"></i>
+                        </button>
+                        <button>
+                            <i class="far fa-comment"></i>
+                        </button>
+                        <button>
+                            <i class="far fa-paper-plane"></i>
+                        </button>
+                    </section>
+                    <button class="bookmark">
+                        <i class="far fa-bookmark"></i>
+                    </button>
+                </div>
+                <div class="comment-section">
+                    <p class="like-count">30 likes</p>
+                    <p class="comments">
+                        <span class="username-poster">
+                            Username1
+                        </span>
+                        <span class="com">
+                            This is a comment from the original poster that describes the image, but honestly I dont
+                            know
+                            and i need to see how long i can make it so here are some random words. word word word
+                            hello
+                            where am i what is this come onnnnn take up more I need more...
+                        </span>
+                        <button class="more">more</button>
+                    </p>
+                    <p class="comments">
+                        <span class="username-poster">
+                            Username2
+                        </span>
+                        <span class="com">
+                            This is a one line comment
+                        </span>
+                    </p>
+                    <p class="comments">
+                        <span class="username-poster">
+                            Username3
+                        </span>
+                        <span class="com">
+                            Wow what an amazing picture this is the greatest picture ever now i
+                            need to add a lot of wrds to see if it auto formats or not becuase that is important.
+                        </span>
+                    </p>
+                </div>
+            </header>
+        </section>
+    </main>
+</body>
+
+</html>
