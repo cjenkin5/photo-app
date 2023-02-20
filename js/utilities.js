@@ -21,5 +21,6 @@ export async function getAccessToken(rootURL, username, password) {
         body: JSON.stringify(postData)
     });
     const data = await response.json();
+    console.log(data);
     return data.access_token;
 }
