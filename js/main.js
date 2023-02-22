@@ -24,6 +24,58 @@ const storyToHtml=(story)=>{
     `
 }
 
+const showSugProfile = async (token) => {
+    const endpoint = `${rootURL}/api/profile`;
+    const response = await fetch(endpoint, {
+        method: "GET",
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer '+ token
+        }
+    })
+    const data = await response.json();
+    console.log('Profile: ', data);
+    //const htmlChunk= data.map(sugProfToHtml).join('')
+    const htmlChunk = sugProfToHtml(data);
+    console.log(htmlChunk);
+    document.querySelector('.Suggestions').innerHTML= htmlChunk;
+}
+
+const sugProfToHtml = (prof) =>{
+    return `
+    <img class="prof" src="${prof.image_url}">
+    <section>${prof.username}</section>
+    `
+}
+
+
+const showSuggestions = async (token) => {
+    const endpoint = `${rootURL}/api/suggestions/`;
+    const response = await fetch(endpoint, {
+        method: "GET",
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer '+ token
+        }
+    })
+    const data = await response.json();
+    console.log('Suggestions: ', data);
+    const htmlChunk= data.map(suggestionToHtml).join('')
+    document.querySelector('.sug-panel').innerHTML= htmlChunk;
+
+}
+
+const suggestionToHtml = (sug) =>{
+    return `
+    <div id="panel-1">
+        <img class="prof" src="${sug.image_url}">
+        <section id="user1">${sug.username}</section>
+        <p>Suggested for you</p>
+        <button class="follow-button">follow</button>
+     </div>`
+}
+
+
 const showPosts = async (token) => {
     console.log('code to show posts');
 }
@@ -36,6 +88,8 @@ const initPage = async () => {
     // then use the access token provided to access data on the user's behalf
     showStories(token);
     showPosts(token);
+    showSugProfile(token);
+    showSuggestions(token);
 }
 
 initPage();
