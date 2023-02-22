@@ -60,7 +60,8 @@ const showSuggestions = async (token) => {
     })
     const data = await response.json();
     console.log('Suggestions: ', data);
-    const htmlChunk= data.map(suggestionToHtml).join('')
+    const htmlChunk2= data.map(suggestionToHtml).join('')
+    const htmlChunk = `<span>Suggestions for you</span>`+htmlChunk2
     document.querySelector('.sug-panel').innerHTML= htmlChunk;
 
 }
