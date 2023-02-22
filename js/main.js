@@ -19,7 +19,7 @@ const storyToHtml=(story)=>{
     return `
         <section>
             <img src="${story.user.thumb_url}" />
-            <p>${story.user.username}</p>
+            <button>${story.user.username}</button>
         </section>
     `
 }
@@ -79,8 +79,43 @@ const suggestionToHtml = (sug) =>{
 
 const showPosts = async (token) => {
     console.log('code to show posts');
+    const endpoint = `${rootURL}/api/posts`;
+    const response = await fetch(endpoint, {
+        method: "GET",
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer '+ token
+        }
+    })
+    const data = await response.json();
+    console.log('posts: ', data);
 }
 
+const showCommentAndButton = post => {
+    //to do, don't show button if no button is needed
+    const hasComments = post.comments.length > 0;
+    if(hasComments){
+        return ``
+    }
+}
+
+const postToHtml = post => {
+    return `
+    <section>
+        <img src = "${post.image_url}"/>
+        <p>This is a caption</p>
+    </section>`
+
+    // &{post.comment.length > 0 ? post.comments[0].text : ''}
+}
+
+
+//for all event handlers attached to dynamic html,
+//need to add those to a window. So instead of const
+// show modal, its 
+//window.showModal = function() =>{
+
+//}
 
 const initPage = async () => {
     // first log in (we will build on this after Spring Break):

@@ -121,7 +121,7 @@ aside{
     color: blue;
 }
 
-
+/* 
 
 #panel-2{
     grid-row: 3/4;
@@ -182,10 +182,10 @@ aside{
     font-size: 15px;
     color: gray;
     font-family: Arial, Helvetica, sans-serif;
-}
+} */
 
 
-
+/* 
 #panel-4{
     grid-row: 5/6;
     display: grid;
@@ -243,7 +243,7 @@ aside{
     font-size: 15px;
     color: gray;
     font-family: Arial, Helvetica, sans-serif;
-}
+} */
 
 
 
@@ -272,12 +272,19 @@ aside>div>img{
 }
 
 #stories-panel{
-    display: grid;
-    grid-template-columns: auto auto auto auto auto auto auto auto;
+    display: flex;
+    /* grid-template-columns: auto auto auto auto auto auto auto auto; */
     max-height: 140px;
     overflow: hidden;
     background-color: white;
 }
+
+/* #stories-panel section{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+} */
 
 #stories-panel>section>img{
     border-radius: 50%;
@@ -286,21 +293,24 @@ aside>div>img{
 }
 
 #stories-panel>section{
-    display: grid;
-    grid-template-rows: 85% 15%;
+    display: flex;
     padding: 10px;
     max-height: 140px;
     align-items: center;
+    justify-content: center;
+    flex-direction: column;
 }
 
 #stories-panel>section>button{
     grid-row: 2/3;
     color:gray;
-    width: 75px;
+    width: 100px;
     background: none;
     border: none;
     padding-top: 10px;
     font-family: Arial, Helvetica, sans-serif;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 hr{
