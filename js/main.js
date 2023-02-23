@@ -89,22 +89,66 @@ const showPosts = async (token) => {
     })
     const data = await response.json();
     console.log('posts: ', data);
+    const htmlChunk = data.map(postToHtml).join('');
+    document.querySelector('.main-feed').innerHTML = htmlChunk;
 }
 
 const showCommentAndButton = post => {
     //to do, don't show button if no button is needed
     const hasComments = post.comments.length > 0;
     if(hasComments){
-        return ``
+        return `
+        <p class="comments">
+            <button class = "com-button">
+                View all ${post.comments.length} comments
+            </button><br>
+            <span class="username-poster">
+                ${post.comments.length > 0 ? post.comments[0].user.username : ''}
+            </span>
+            <span class="com">
+                ${post.comments.length > 0 ? post.comments[0].text : ''}
+            </span>
+            <button class="more">more</button>
+        </p>
+        `
     }
 }
 
 const postToHtml = post => {
     return `
-    <section>
-        <img src = "${post.image_url}"/>
-        <p>This is a caption</p>
-    </section>`
+    <header class="photo-feed">
+                <div class="post-bar-top">
+                    <p>${post.user.username}</p>
+                    <button>
+                        <i id="top" class="fas fa-ellipsis-h"></i>
+                    </button>
+                </div>
+                <img class="post" src="${post.image_url}">
+                <div class="post-bar-bottom">
+                    <section class="bottom-icons">
+                        <button>
+                            <i class="far fa-heart"></i>
+                        </button>
+                        <button>
+                            <i class="far fa-comment"></i>
+                        </button>
+                        <button>
+                            <i class="far fa-paper-plane"></i>
+                        </button>
+                    </section>
+                    <button class="bookmark">
+                        <i class="far fa-bookmark"></i>
+                    </button>
+                </div>
+                <div class="comment-section">
+                    <p class="like-count">${post.likes.length} likes</p>
+                    <p class = "caption">
+                        <strong>${post.user.username}</strong>
+                        ${post.caption}
+                    </p>
+                    ${showCommentAndButton(post)}
+                </div>
+            </header>`
 
     // &{post.comment.length > 0 ? post.comments[0].text : ''}
 }

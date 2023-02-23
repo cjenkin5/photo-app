@@ -389,6 +389,13 @@ hr{
     font-family: Arial, Helvetica, sans-serif;
 }
 
+.com-button{
+    padding-bottom: 10px;
+    border: none;
+    background: none;
+    color: blue;
+}
+
 .more{
     background: none;
     border: none;
