@@ -366,6 +366,10 @@ hr{
     border: none;
 }
 
+#liked{
+    color: red;
+}
+
 .post{
     width: 100%;
 }
@@ -396,11 +400,36 @@ hr{
     background: none;
     color: blue;
     margin-left: -5px;
+    font-size: 1em;
 }
 
 .days-ago{
     color: gray;
     font-size: 0.8em;
+}
+
+.add-comm{
+    display: flex;
+    justify-content: space-between;
+    padding-top: 10px;
+    padding-bottom: 5px;
+}
+
+#add-c{
+    border: none;
+    font-size: 1.3em;
+}
+
+.post-com-button{
+    border: none;
+    background:none;
+    font-size: 1.3em;
+    color: blue;
+    padding-right: 10px;
+}
+
+.com-line{
+    margin-left: -20px;
 }
 
 .more{

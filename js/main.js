@@ -103,20 +103,41 @@ const showCommentAndButton = post => {
                 View all ${post.comments.length} comments
             </button><br>
             <span class="username-poster">
-                ${post.comments.length > 0 ? post.comments[0].user.username : ''}
+                ${post.comments.length > 0 ? post.comments[post.comments.length-1].user.username : ''}
             </span>
             <span class="com">
-                ${post.comments.length > 0 ? post.comments[0].text : ''}
+                ${post.comments.length > 0 ? post.comments[post.comments.length-1].text : ''}
             </span>
             <p class = "days-ago">
-            ${post.comments.length > 0 ? post.comments[0].display_time : ''}
+            ${post.comments.length > 0 ? post.comments[post.comments.length-1].display_time : ''}
             </p>
 
         </p>
         `
     }
+    else{
+        return ``
+    }
 }
 // <button class="more">more</button>
+
+const isLiked = post => {
+    if(post.current_user_like_id != undefined){
+        return `<i id="liked" class="fas fa-heart"></i>`
+    }else{
+        return `<i id="notLiked" class="far fa-heart"></i>`
+    }
+}
+
+const isBookmarked = post => {
+    if(post.current_user_bookmark_id != undefined){
+        return `<i class="fas fa-bookmark"></i>`
+    }
+    else{
+        return `<i class="far fa-bookmark"></i>`
+    }
+
+}
 
 const postToHtml = post => {
     return `
@@ -131,7 +152,7 @@ const postToHtml = post => {
                 <div class="post-bar-bottom">
                     <section class="bottom-icons">
                         <button>
-                            <i class="far fa-heart"></i>
+                            ${isLiked(post)}
                         </button>
                         <button>
                             <i class="far fa-comment"></i>
@@ -141,7 +162,7 @@ const postToHtml = post => {
                         </button>
                     </section>
                     <button class="bookmark">
-                        <i class="far fa-bookmark"></i>
+                        ${isBookmarked(post)}
                     </button>
                 </div>
                 <div class="comment-section">
@@ -154,6 +175,12 @@ const postToHtml = post => {
                         ${post.display_time}
                     </p>
                     ${showCommentAndButton(post)}
+                    <hr class="com-line">
+                    <section class = "add-comm">
+                        <input type="text" id="add-c" placeholder="Add a comment...">
+
+                        <button class="post-com-button">Post</button>
+                    </section>
                 </div>
             </header>`
 
