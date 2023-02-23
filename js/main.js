@@ -108,11 +108,15 @@ const showCommentAndButton = post => {
             <span class="com">
                 ${post.comments.length > 0 ? post.comments[0].text : ''}
             </span>
-            <button class="more">more</button>
+            <p class = "days-ago">
+            ${post.comments.length > 0 ? post.comments[0].display_time : ''}
+            </p>
+
         </p>
         `
     }
 }
+// <button class="more">more</button>
 
 const postToHtml = post => {
     return `
@@ -145,6 +149,9 @@ const postToHtml = post => {
                     <p class = "caption">
                         <strong>${post.user.username}</strong>
                         ${post.caption}
+                    </p>
+                    <p class = "days-ago">
+                        ${post.display_time}
                     </p>
                     ${showCommentAndButton(post)}
                 </div>
