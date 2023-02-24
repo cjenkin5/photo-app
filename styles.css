@@ -444,7 +444,22 @@ hr{
     background-color: white;
 }
 
+.modal {
+    display: block;
+    position: fixed;
+    width: 100vw; 
+    height: 100vh;
+    background-color: rgba(112, 112, 112, 0.4);
+  }
 
+  .modal-content {
+    display: flex;
+    background-color: #fefefe;
+    margin-left: 5%;
+    margin-top: 5%;
+    width: 90vw;
+    height: 75vh;
+  }
 
 @media (max-width: 800px) {
     aside{

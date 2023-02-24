@@ -37,8 +37,10 @@ const showSugProfile = async (token) => {
     console.log('Profile: ', data);
     //const htmlChunk= data.map(sugProfToHtml).join('')
     const htmlChunk = sugProfToHtml(data);
+    const htmlChunk2 = upperUsername(data);
     console.log(htmlChunk);
     document.querySelector('.Suggestions').innerHTML= htmlChunk;
+    document.querySelector('.username').innerHTML = htmlChunk2
 }
 
 const sugProfToHtml = (prof) =>{
@@ -46,6 +48,10 @@ const sugProfToHtml = (prof) =>{
     <img class="prof" src="${prof.image_url}">
     <section>${prof.username}</section>
     `
+}
+
+const upperUsername = prof => {
+    return `${prof.username}`
 }
 
 
@@ -191,9 +197,9 @@ const postToHtml = post => {
 //for all event handlers attached to dynamic html,
 //need to add those to a window. So instead of const
 // show modal, its 
-//window.showModal = function() =>{
-
-//}
+window.showModal = function() {
+    return``
+}
 
 const initPage = async () => {
     // first log in (we will build on this after Spring Break):
