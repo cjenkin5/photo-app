@@ -306,7 +306,7 @@ const showModalProfile = post =>{
 
 window.closeModal = function(){
     modalElement.classList.add('hidden');
-    modalElement.setAttribute('aria-hidden', 'false');
+    modalElement.setAttribute('aria-hidden', 'true');
     document.querySelector('.com-button').focus();
 }
 
