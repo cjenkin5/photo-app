@@ -15,6 +15,7 @@
 </head>
 
 <body>
+
     <header id="topnav">
         <h1 class="logo">
             Photo App
@@ -50,12 +51,13 @@
             </section>
         </section>
     </main>
-    <!-- <div class="modal">
+    <div class="modal hidden" aria-hidden="true" role ="dialog">
+        <button class="close" onclick="closeModal()">Close</button>
         <div class = "modal-content">
-        <img src="https://picsum.photos/600/430?id=139">
-        <p class="modal-comments">Some text</p>
+            <div class="image" style="background-image: url('https://picsum.photos/600/430?id=139');"></div>
+            <p class="modal-comments">Some text</p>
         </div>
-    </div> -->
+    </div>
 </body>
 
 </html>

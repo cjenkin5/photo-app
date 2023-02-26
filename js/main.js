@@ -1,6 +1,8 @@
 import {getAccessToken} from './utilities.js';
 const rootURL = 'https://photo-app-secured.herokuapp.com';
 
+let token;
+
 const showStories = async (token) => {
     const endpoint = `${rootURL}/api/stories`;
     const response = await fetch(endpoint, {
@@ -105,7 +107,7 @@ const showCommentAndButton = post => {
     if(hasComments){
         return `
         <p class="comments">
-            <button class = "com-button">
+            <button class = "com-button" onclick="showModal(${post.id})">
                 View all ${post.comments.length} comments
             </button><br>
             <span class="username-poster">
@@ -125,6 +127,8 @@ const showCommentAndButton = post => {
         return ``
     }
 }
+
+
 // <button class="more">more</button>
 
 const isLiked = post => {
@@ -197,13 +201,105 @@ const postToHtml = post => {
 //for all event handlers attached to dynamic html,
 //need to add those to a window. So instead of const
 // show modal, its 
-window.showModal = function() {
-    return``
+const modalElement= document.querySelector('.modal');
+
+window.showModal = function(postId) {
+    modalElement.classList.remove('hidden');
+    modalElement.setAttribute('aria-hidden', 'false');
+    document.querySelector('.close').focus();
+    console.log(postId)
+    modalContent(postId)
+    //const htmlChunk = data.map(postToHtml).join('');
+
+
+
+}
+
+const modalContent = async postId =>{
+    const endpoint = `${rootURL}/api/posts/${postId}`;
+    const response = await fetch(endpoint, {
+        method: "GET",
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer '+ token
+        }
+    })
+    const data = await response.json();
+    console.log('post: ', data);
+    const htmlChunk1 = showModalCaption(data)
+    const htmlChunk2 = showModalImage(data)
+    // const element = document.querySelector('.image')
+    // element.remove()
+    let element = document.querySelector('.image')
+    element.setAttribute("style",htmlChunk2)
+    const hasComments=data.comments.length>0
+    if(hasComments){
+        const htmlChunk3 = data.comments.map(ShowModalContent).join('');
+        const htmlChunk = htmlChunk1+htmlChunk3;
+        document.querySelector('.modal-comments').innerHTML=htmlChunk
+    }else{
+        const htmlChunk = htmlChunk1
+        document.querySelector('.modal-comments').innerHTML = htmlChunk;
+    }
+    //document.querySelector('.model-comments').innerHTML = htmlChunk;
+}
+
+const ShowModalContent = comment => {
+    console.log(comment)
+    return `
+    <section class="comment-modal-ind">
+
+        <img class="modal-image" src="${comment.user.image_url}">
+        <div class = "modal-text">
+        <span class="username-poster">
+            ${comment.user.username}
+        </span>
+        <span class="com">
+            ${comment.text}
+        </span>
+        <p class = "days-ago">
+            ${comment.display_time}
+        </p>
+        </div>
+        <button class="modal-like-button">
+            <i id="like-for-modal-comment" class="far fa-heart"></i>
+        </button>
+    </section>`
+}
+
+const showModalCaption = post =>{
+    return `<section class = "modal-caption">
+    <img class="modal-image" src="${post.user.image_url}">
+    <div class="modal-text-caption">
+        <span class="username-poster">
+            ${post.user.username}
+        </span>
+        <span class="com">
+            ${post.caption}
+        </span>
+        <p class = "days-ago">
+        ${post.display_time}
+        </p>
+    </div>
+    <button class="modal-like-button">
+            <i id="like-for-modal-comment" class="far fa-heart"></i>
+    </button>
+</section>`
+}
+
+const showModalImage = post =>{
+    return `background-image: url('${post.image_url}');`
+}
+
+window.closeModal = function(){
+    modalElement.classList.add('hidden');
+    modalElement.setAttribute('aria-hidden', 'false');
+    document.querySelector('.com-button').focus();
 }
 
 const initPage = async () => {
     // first log in (we will build on this after Spring Break):
-    const token = await getAccessToken(rootURL, 'webdev', 'password');
+    token = await getAccessToken(rootURL, 'chase', 'chase_password');
     console.log(token);
     // then use the access token provided to access data on the user's behalf
     showStories(token);

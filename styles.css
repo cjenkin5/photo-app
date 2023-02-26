@@ -445,21 +445,89 @@ hr{
 }
 
 .modal {
-    display: block;
+    display: flex;
+    flex-direction: column;
     position: fixed;
+    left: 0;
+    top: 0;
     width: 100vw; 
     height: 100vh;
-    background-color: rgba(112, 112, 112, 0.4);
+    background-color: rgba(112, 112, 112, 0.9);
+  }
+
+  .hidden{
+    display: none !important;
   }
 
   .modal-content {
-    display: flex;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
     background-color: #fefefe;
     margin-left: 5%;
     margin-top: 5%;
     width: 90vw;
     height: 75vh;
   }
+  .image {
+    width: 100%;
+    height: 75vh;
+    background-size: cover;
+    background-position: center center;
+}
+
+  .close{
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+    width: 100px;
+    height: 40px;
+    top: 0;
+    right: 20px;
+    margin-top: 25px;
+    position:fixed;
+  }
+
+  .modal-comments{
+    padding-left: 10px;
+    grid-column: 2/3;
+    height: 70vh;
+    overflow-y: auto;
+  }
+
+  .comment-modal-ind{
+    display: grid;
+    grid-template-columns: 20% 70% 10%;
+  }
+
+  .modal-text{
+    grid-column: 2/3;
+  }
+  
+  .modal-image{
+    grid-column: 1/2;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+  }
+
+  .modal-like-button{
+    grid-column: 3/4;
+    background: none;
+    border: none;
+  }
+
+  .modal-caption{
+    display: grid;
+    grid-template-columns: 20% 70% 10%;
+    padding-bottom: 10px;
+  }
+
+  .modal-text-caption{
+    grid-column: 2/3;
+  }
+
+
+
 
 @media (max-width: 800px) {
     aside{
