@@ -228,6 +228,7 @@ const modalContent = async postId =>{
     console.log('post: ', data);
     const htmlChunk1 = showModalCaption(data)
     const htmlChunk2 = showModalImage(data)
+    const htmlChuckProf = showModalProfile(data)
     // const element = document.querySelector('.image')
     // element.remove()
     let element = document.querySelector('.image')
@@ -235,10 +236,10 @@ const modalContent = async postId =>{
     const hasComments=data.comments.length>0
     if(hasComments){
         const htmlChunk3 = data.comments.map(ShowModalContent).join('');
-        const htmlChunk = htmlChunk1+htmlChunk3;
+        const htmlChunk = htmlChuckProf+htmlChunk1+htmlChunk3;
         document.querySelector('.modal-comments').innerHTML=htmlChunk
     }else{
-        const htmlChunk = htmlChunk1
+        const htmlChunk = htmlChuckProf+htmlChunk1
         document.querySelector('.modal-comments').innerHTML = htmlChunk;
     }
     //document.querySelector('.model-comments').innerHTML = htmlChunk;
@@ -289,6 +290,18 @@ const showModalCaption = post =>{
 
 const showModalImage = post =>{
     return `background-image: url('${post.image_url}');`
+}
+
+const showModalProfile = post =>{
+    return `
+    <section class="modal-profile-container">
+    <div class="modal-profile">
+        <img class="modal-image-profile" src="${post.user.image_url}">
+        <span class="modal-profile-username">
+            ${post.user.username}
+        </span>
+    </div>
+    </section>`
 }
 
 window.closeModal = function(){

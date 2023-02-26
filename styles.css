@@ -520,6 +520,36 @@ hr{
     display: grid;
     grid-template-columns: 20% 70% 10%;
     padding-bottom: 10px;
+    padding-top: 10px;
+  }
+
+.modal-profile-container{
+    position: sticky;
+    top: 0;
+    background-color: white;
+    border-bottom: 1px solid lightgray;
+}
+
+  .modal-profile{
+    display: grid;
+    grid-template-columns: 30% 70%;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 20px;
+
+  }
+
+  .modal-image-profile{
+    grid-column: 1/2;
+    border-radius: 50%;
+    height: 60px;
+    width: 60px;
+  }
+
+  .modal-profile-username{
+    grid-column: 2/3;
+    font-size: 1.5em;
+    font-weight: bold;
   }
 
   .modal-text-caption{
