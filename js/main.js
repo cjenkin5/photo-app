@@ -273,15 +273,39 @@ const postToHtml = post => {
                     </p>
                     ${showCommentAndButton(post)}
                     <hr class="com-line">
-                    <section class = "add-comm">
-                        <input type="text" id="add-c" placeholder="Add a comment...">
+                    <section class = "add-comm" id="post_com_${post.id}">
+                        <input type="text" id="add-c" class="com_${post.id}" placeholder="Add a comment...">
 
-                        <button class="post-com-button">Post</button>
+                        <button class="post-com-button" onclick="addComment(${post.id})">Post</button>
                     </section>
                 </div>
             </header>`
 
     // &{post.comment.length > 0 ? post.comments[0].text : ''}
+}
+
+
+window.addComment = async (postID) => {
+    const text = document.querySelector(`.com_${postID}`).value
+    // define the endpoint:
+    const endpoint = `${rootURL}/api/comments`;
+    const postData = {
+        "post_id": postID,
+        "text": `${text}`
+    };
+
+    // Create the bookmark:
+    const response = await fetch(endpoint, {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+        },
+        body: JSON.stringify(postData)
+    })
+    const data = await response.json();
+    console.log(data);
+    requeryRedraw(postID);
 }
 
 
