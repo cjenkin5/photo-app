@@ -85,18 +85,18 @@ const suggestionToHtml = (sug) =>{
      </div>`
 }
 
-const isFollowing = async sugID =>{
-    const endpoint = `${rootURL}/api/following/`;
-    const response = await fetch(endpoint, {
-        method: "GET",
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY3ODcyMzE1OSwianRpIjoiMDFlNjNkZDktM2ZlMi00NjdiLWI2YjItODdmMTBlMWEyNjM4IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6MSwibmJmIjoxNjc4NzIzMTU5LCJjc3JmIjoiYjg3MmY0YWItZTcyOC00YTdhLWI2NjEtYTBlNmJmMTI1YWEyIiwiZXhwIjoxNjc4NzI0MDU5fQ.I5z7bJ5NLwW69xEIAFpxkZTxvVcy2EBR2GKr9wQiib0'
-        }
-    });
-    const data = await response.json();
-    console.log(data);
-}
+// const isFollowing = async sugID =>{
+//     const endpoint = `${rootURL}/api/following/`;
+//     const response = await fetch(endpoint, {
+//         method: "GET",
+//         headers: {
+//             'Content-Type': 'application/json',
+//             'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY3ODcyMzE1OSwianRpIjoiMDFlNjNkZDktM2ZlMi00NjdiLWI2YjItODdmMTBlMWEyNjM4IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6MSwibmJmIjoxNjc4NzIzMTU5LCJjc3JmIjoiYjg3MmY0YWItZTcyOC00YTdhLWI2NjEtYTBlNmJmMTI1YWEyIiwiZXhwIjoxNjc4NzI0MDU5fQ.I5z7bJ5NLwW69xEIAFpxkZTxvVcy2EBR2GKr9wQiib0'
+//         }
+//     });
+//     const data = await response.json();
+//     console.log(data);
+// }
 
 
 const showPosts = async (token) => {
