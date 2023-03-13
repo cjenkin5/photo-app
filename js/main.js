@@ -133,25 +133,116 @@ const showCommentAndButton = post => {
 
 const isLiked = post => {
     if(post.current_user_like_id != undefined){
-        return `<i id="liked" class="fas fa-heart"></i>`
+        return `
+        <button onclick="unlikePost(${post.current_user_like_id}, ${post.id})">
+            <i id="liked" class="fas fa-heart"></i>
+        </button>`
     }else{
-        return `<i id="notLiked" class="far fa-heart"></i>`
+        return `
+        <button onclick="likePost(${post.id})">
+            <i id="notLiked" class="far fa-heart"></i>
+        </button>`
     }
 }
 
+
+window.likePost = async (postID) => {
+    // define the endpoint:
+    const endpoint = `${rootURL}/api/posts/likes/`;
+    const postData = {
+        "post_id": postID
+    };
+
+    // Create the bookmark:
+    const response = await fetch(endpoint, {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+        },
+        body: JSON.stringify(postData)
+    })
+    const data = await response.json();
+    console.log(data);
+    requeryRedraw(postID);
+}
+
+
+window.unlikePost = async (likeID, postID) => {
+    // define the endpoint:
+    const endpoint = `${rootURL}/api/posts/likes/${likeID}`;
+
+    // Create the bookmark:
+    const response = await fetch(endpoint, {
+        method: "DELETE",
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+        }
+    })
+    const data = await response.json();
+    console.log(data);
+    requeryRedraw(postID);
+}
+
+
 const isBookmarked = post => {
     if(post.current_user_bookmark_id != undefined){
-        return `<i class="fas fa-bookmark"></i>`
+        return `
+        <button class="bookmark" onclick="unbookmarkPost(${post.current_user_bookmark_id}, ${post.id})">
+            <i class="fas fa-bookmark"></i>
+        </button>`
     }
     else{
-        return `<i class="far fa-bookmark"></i>`
+        return `
+        <button class="bookmark" onclick="bookmarkPost(${post.id})">
+            <i class="far fa-bookmark"></i>
+        </button>`
     }
 
+}
+
+window.bookmarkPost = async (postID) => {
+    // define the endpoint:
+    const endpoint = `${rootURL}/api/bookmarks/`;
+    const postData = {
+        "post_id": postID
+    };
+
+    // Create the bookmark:
+    const response = await fetch(endpoint, {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+        },
+        body: JSON.stringify(postData)
+    })
+    const data = await response.json();
+    console.log(data);
+    requeryRedraw(postID);
+}
+
+window.unbookmarkPost = async (bookmarkID, postID) => {
+    // define the endpoint:
+    const endpoint = `${rootURL}/api/bookmarks/${bookmarkID}`;
+
+    // Create the bookmark:
+    const response = await fetch(endpoint, {
+        method: "DELETE",
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+        }
+    })
+    const data = await response.json();
+    console.log(data);
+    requeryRedraw(postID);
 }
 
 const postToHtml = post => {
     return `
-    <header class="photo-feed">
+    <header class="photo-feed" id="post_${post.id}">
                 <div class="post-bar-top">
                     <p>${post.user.username}</p>
                     <button>
@@ -161,9 +252,7 @@ const postToHtml = post => {
                 <img class="post" src="${post.image_url}">
                 <div class="post-bar-bottom">
                     <section class="bottom-icons">
-                        <button>
                             ${isLiked(post)}
-                        </button>
                         <button>
                             <i class="far fa-comment"></i>
                         </button>
@@ -171,9 +260,7 @@ const postToHtml = post => {
                             <i class="far fa-paper-plane"></i>
                         </button>
                     </section>
-                    <button class="bookmark">
                         ${isBookmarked(post)}
-                    </button>
                 </div>
                 <div class="comment-section">
                     <p class="like-count">${post.likes.length} likes</p>
@@ -197,6 +284,29 @@ const postToHtml = post => {
     // &{post.comment.length > 0 ? post.comments[0].text : ''}
 }
 
+
+const requeryRedraw = async postId =>{
+    const endpoint = `${rootURL}/api/posts/${postId}`;
+    const response = await fetch(endpoint, {
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+        }
+    })
+    const data = await response.json();
+    console.log(data);
+    const htmlChunk = postToHtml(data);
+    targetElementAndReplace(`#post_${postId}`, htmlChunk);
+
+}
+
+const targetElementAndReplace = (selector, newHTML) => { 
+	const div = document.createElement('div'); 
+	div.innerHTML = newHTML;
+	const newEl = div.firstElementChild; 
+    const oldEl = document.querySelector(selector);
+    oldEl.parentElement.replaceChild(newEl, oldEl);
+}
 
 //for all event handlers attached to dynamic html,
 //need to add those to a window. So instead of const
