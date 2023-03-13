@@ -75,13 +75,27 @@ const showSuggestions = async (token) => {
 }
 
 const suggestionToHtml = (sug) =>{
+    console.log('sug.id', sug.id)
     return `
     <div id="panel-1">
         <img class="prof" src="${sug.image_url}">
         <section id="user1">${sug.username}</section>
         <p>Suggested for you</p>
-        <button class="follow-button">follow</button>
+        <button class="follow-button" id="follow_button_${sug.id}" onclick="followAccount(${sug.id})">follow</button>
      </div>`
+}
+
+const isFollowing = async sugID =>{
+    const endpoint = `${rootURL}/api/following/`;
+    const response = await fetch(endpoint, {
+        method: "GET",
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY3ODcyMzE1OSwianRpIjoiMDFlNjNkZDktM2ZlMi00NjdiLWI2YjItODdmMTBlMWEyNjM4IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6MSwibmJmIjoxNjc4NzIzMTU5LCJjc3JmIjoiYjg3MmY0YWItZTcyOC00YTdhLWI2NjEtYTBlNmJmMTI1YWEyIiwiZXhwIjoxNjc4NzI0MDU5fQ.I5z7bJ5NLwW69xEIAFpxkZTxvVcy2EBR2GKr9wQiib0'
+        }
+    });
+    const data = await response.json();
+    console.log(data);
 }
 
 
@@ -301,11 +315,59 @@ window.addComment = async (postID) => {
             'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + token
         },
-        body: JSON.stringify(postData)
     })
     const data = await response.json();
     console.log(data);
     requeryRedraw(postID);
+}
+
+
+window.followAccount = async (sugID) => {
+    // define the endpoint:
+    const endpoint = `${rootURL}/api/following`;
+    const postData = {
+        "user_id": sugID,
+    };
+
+    // Create the bookmark:
+    const response = await fetch(endpoint, {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+        },
+        body: JSON.stringify(postData)
+    })
+    const data = await response.json();
+    console.log(data);
+    redrawButton(sugID, data.id);
+}
+
+const redrawButton = async (sugid, dataid) =>{
+    document.querySelector(`#follow_button_${sugid}`).innerHTML = 'unfollow'
+    document.querySelector(`#follow_button_${sugid}`).setAttribute('onclick', `unfollowAccount(${dataid}, ${sugid})`)
+}
+
+window.unfollowAccount = async (dataID, sugID) =>{
+       // define the endpoint:
+       const endpoint = `${rootURL}/api/following/${dataID}`;
+   
+       // Create the bookmark:
+       const response = await fetch(endpoint, {
+           method: "DELETE",
+           headers: {
+               'Content-Type': 'application/json',
+               'Authorization': 'Bearer ' + token
+           }
+       })
+       const data = await response.json();
+       console.log(data);
+       redrawButton2(sugID);
+}
+
+const redrawButton2 = async sugid =>{
+    document.querySelector(`#follow_button_${sugid}`).innerHTML = 'follow'
+    document.querySelector(`#follow_button_${sugid}`).setAttribute('onclick', `followAccount(${sugid})`)
 }
 
 
