@@ -301,7 +301,7 @@ const postToHtml = post => {
 
 window.addComment = async (postID) => {
     const text = document.querySelector(`.com_${postID}`).value
-    // define the endpoint:
+    console.log(text)
     const endpoint = `${rootURL}/api/comments`;
     const postData = {
         "post_id": postID,
@@ -315,6 +315,7 @@ window.addComment = async (postID) => {
             'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + token
         },
+        body: JSON.stringify(postData)
     })
     const data = await response.json();
     console.log(data);
