@@ -81,7 +81,7 @@ const suggestionToHtml = (sug) =>{
         <img class="prof" src="${sug.image_url}">
         <section id="user1">${sug.username}</section>
         <p>Suggested for you</p>
-        <button class="follow-button" id="follow_button_${sug.id}" onclick="followAccount(${sug.id})">follow</button>
+        <button aria-checked="false" class="follow-button" id="follow_button_${sug.id}" onclick="followAccount(${sug.id})">follow</button>
      </div>`
 }
 
@@ -148,12 +148,12 @@ const showCommentAndButton = post => {
 const isLiked = post => {
     if(post.current_user_like_id != undefined){
         return `
-        <button onclick="unlikePost(${post.current_user_like_id}, ${post.id})">
+        <button aria-checked="true" onclick="unlikePost(${post.current_user_like_id}, ${post.id})">
             <i id="liked" class="fas fa-heart"></i>
         </button>`
     }else{
         return `
-        <button onclick="likePost(${post.id})">
+        <button aria-checked="false" onclick="likePost(${post.id})">
             <i id="notLiked" class="far fa-heart"></i>
         </button>`
     }
@@ -203,13 +203,13 @@ window.unlikePost = async (likeID, postID) => {
 const isBookmarked = post => {
     if(post.current_user_bookmark_id != undefined){
         return `
-        <button class="bookmark" onclick="unbookmarkPost(${post.current_user_bookmark_id}, ${post.id})">
+        <button class="bookmark" aria-checked="true" onclick="unbookmarkPost(${post.current_user_bookmark_id}, ${post.id})">
             <i class="fas fa-bookmark"></i>
         </button>`
     }
     else{
         return `
-        <button class="bookmark" onclick="bookmarkPost(${post.id})">
+        <button class="bookmark" aria-checked="false" onclick="bookmarkPost(${post.id})">
             <i class="far fa-bookmark"></i>
         </button>`
     }
@@ -346,6 +346,7 @@ window.followAccount = async (sugID) => {
 const redrawButton = async (sugid, dataid) =>{
     document.querySelector(`#follow_button_${sugid}`).innerHTML = 'unfollow'
     document.querySelector(`#follow_button_${sugid}`).setAttribute('onclick', `unfollowAccount(${dataid}, ${sugid})`)
+    document.querySelector(`#follow_button_${sugid}`).setAttribute('aria-checked', 'true')
 }
 
 window.unfollowAccount = async (dataID, sugID) =>{
@@ -368,6 +369,7 @@ window.unfollowAccount = async (dataID, sugID) =>{
 const redrawButton2 = async sugid =>{
     document.querySelector(`#follow_button_${sugid}`).innerHTML = 'follow'
     document.querySelector(`#follow_button_${sugid}`).setAttribute('onclick', `followAccount(${sugid})`)
+    document.querySelector(`#follow_button_${sugid}`).setAttribute('aria-checked', 'false')
 }
 
 
